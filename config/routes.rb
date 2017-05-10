@@ -1,4 +1,5 @@
 DepotAgile::Application.routes.draw do
+  get "store/index"
   resources :products
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -41,7 +42,7 @@ DepotAgile::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
@@ -55,4 +56,5 @@ DepotAgile::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root to: 'store#index', as: 'store'
 end
