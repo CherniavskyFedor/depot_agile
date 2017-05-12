@@ -53,4 +53,13 @@ class ProductsControllerTest < ActionController::TestCase
     patch :update, id: @product, product: @update
     assert_redirected_to product_path(assigns(:product))
   end
+
+  test "should how many product" do
+    get :index
+    assert_response :success
+    #puts response.public_methods.sort
+    #puts response.body
+    assert_select  'td.list_description dl dt', 3
+    assert_select  'td.list_description dl dd', 3
+  end
 end
