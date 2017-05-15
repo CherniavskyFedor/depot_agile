@@ -27,10 +27,11 @@ class LineItemsController < ApplicationController
     @line_item = @cart.add_product(product.id)
     respond_to do |format|
       if @line_item.save
-        format.html {redirect_to @line_item.cart, notice: 'Line item was seccessfully created.'}
-        format.json {render action: 'show', status: :created, location: @line_item }
+        session[:counter] = 0
+        format.html { redirect_to @line_item.cart }
+        format.json { render action: 'show', status: :created, location: @line_item }
       else
-        format.html {render action: 'new'}
+        format.html { render action: 'new' }
         format.json { render json: @line_item.error, status: :unprocessable_entity }
       end
     end
@@ -59,6 +60,6 @@ class LineItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
+      params.require(:line_item).permit(:product_id)
     end
 end
