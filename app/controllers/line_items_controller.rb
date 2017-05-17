@@ -49,7 +49,7 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   def destroy
     @line_item.destroy
-    redirect_to line_items_url, notice: 'Line item was successfully destroyed.'
+    redirect_to cart_path(@line_item.cart), notice: 'Line item was successfully destroyed.'
   end
 
   private
