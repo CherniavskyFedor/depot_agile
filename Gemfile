@@ -20,4 +20,4 @@ gem 'jquery-rails'
 gem 'therubyracer'
 gem 'execjs'
 gem 'turbolinks'
-
+gem 'jquery-ui-rails'
