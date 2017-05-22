@@ -41,7 +41,7 @@ class LineItemsController < ApplicationController
   # PATCH/PUT /line_items/1
   def update
     if @line_item.update(line_item_params)
-      redirect_to @line_item, notice: 'Line item was successfully updated.'
+      redirect_to store_url, notice: 'Line item was successfully updated.'
     else
       render action: 'edit'
     end
@@ -50,7 +50,7 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   def destroy
     @line_item.destroy
-    redirect_to cart_path(@line_item.cart), notice: 'Line item was successfully destroyed.'
+    redirect_to store_url, notice: 'Line item was successfully destroyed.'
   end
 
   private
@@ -61,6 +61,6 @@ class LineItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def line_item_params
-      params.require(:line_item).permit(:product_id)
+      params.require(:line_item).permit(:product_id, :quantity)
     end
 end
