@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :update, :destroy]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /line_items
@@ -39,18 +39,35 @@ class LineItemsController < ApplicationController
   end
 
   # PATCH/PUT /line_items/1
+  #def update
+   # if @line_item.update(line_item_params)
+      #redirect_to store_url, notice: 'Line item was successfully updated.'
+    #else
+      #render action: 'edit'
+    #end
+  #end
   def update
-    if @line_item.update(line_item_params)
-      redirect_to store_url, notice: 'Line item was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @line_item.update(line_item_params)
+        format.html {redirect_to store_url, notice: 'Line item was successfully updated'}
+        format.js
+        format.json { render action: 'show', status: :update, location: @line_item}
+      else
+        format.html { render action: 'edit' }
+        format.js
+        format.json { render json: @line_item.error, status: :unprocessable_entity}
+      end
     end
   end
 
   # DELETE /line_items/1
   def destroy
-    @line_item.destroy
-    redirect_to store_url, notice: 'Line item was successfully destroyed.'
+    respond_to do |format|
+      if @line_item.destroy
+        format.html { redirect_to store_url, notice: 'Line item was successfully destroyed.' }
+        format.js
+      end
+    end
   end
 
   private
