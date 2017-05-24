@@ -9,4 +9,8 @@ module CurrentCart
     @cart = Cart.create
     session[:cart_id] = @cart.id
   end
+
+  def current_cart
+    set_cart
+  end
 end
