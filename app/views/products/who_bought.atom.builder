@@ -33,3 +33,4 @@ atom_feed do |feed|
     end
   end
 end
+
