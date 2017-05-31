@@ -1,0 +1,80 @@
+2.0.0-p648 :001 > LineItem.count
+   (0.1ms)  SELECT COUNT(*) FROM "line_items"
+ => 12
+
+#LineItem.count ----vozvroshaet koli4estvo line_item-ov naxodyawix  v baze danix
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.0.0-p648 :002 > LineItem.all
+  LineItem Load (0.3ms)  SELECT "line_items".* FROM "line_items"
+ => #<ActiveRecord::Relation [#<LineItem id: 22, product_id: 2, cart_id: 14, created_at: "2017-05-18 11:35:06", updated_at: "2017-05-29 12:21:29", quantity: 7, price: #<BigDecimal:1e700f8,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 56, product_id: 2, cart_id: nil, created_at: "2017-05-24 08:46:42", updated_at: "2017-05-24 14:12:18", quantity: 4, price: #<BigDecimal:1e756e8,'0.36E2',9(36)>, order_id: 1>, #<LineItem id: 57, product_id: 1, cart_id: nil, created_at: "2017-05-24 08:46:44", updated_at: "2017-05-24 14:12:18", quantity: 3, price: #<BigDecimal:1e7a490,'0.1223E2',18(45)>, order_id: 1>, #<LineItem id: 58, product_id: 2, cart_id: 20, created_at: "2017-05-24 08:47:20", updated_at: "2017-05-24 08:47:20", quantity: 1, price: #<BigDecimal:1e89da0,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 59, product_id: 3, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:1e8dec8,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 60, product_id: 1, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:1e935d0,'0.1223E2',18(45)>, order_id: nil>, #<LineItem id: 61, product_id: 3, cart_id: 14, created_at: "2017-05-24 13:17:07", updated_at: "2017-05-24 13:17:07", quantity: 1, price: #<BigDecimal:1e995e8,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 62, product_id: 1, cart_id: 14, created_at: "2017-05-24 13:17:08", updated_at: "2017-05-24 13:17:08", quantity: 1, price: #<BigDecimal:1e9ecc8,'0.1223E2',18(45)>, order_id: nil>, #<LineItem id: 63, product_id: 3, cart_id: nil, created_at: "2017-05-24 13:46:34", updated_at: "2017-05-24 14:12:18", quantity: 1, price: #<BigDecimal:1e9c360,'0.4995E2',18(45)>, order_id: 1>, #<LineItem id: 64, product_id: 2, cart_id: 21, created_at: "2017-05-24 14:12:28", updated_at: "2017-05-24 14:12:28", quantity: 1, price: #<BigDecimal:1ea1068,'0.36E2',9(36)>, order_id: nil>, ...]>
+
+ LineItem.all - vozvrawaet vse line_item-i v baze danix
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.0.0-p648 :003 > LineItem.all.where(product_id: 2)
+  LineItem Load (0.4ms)  SELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" = 2
+ => #<ActiveRecord::Relation [#<LineItem id: 22, product_id: 2, cart_id: 14, created_at: "2017-05-18 11:35:06", updated_at: "2017-05-29 12:21:29", quantity: 7, price: #<BigDecimal:1f11b60,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 56, product_id: 2, cart_id: nil, created_at: "2017-05-24 08:46:42", updated_at: "2017-05-24 14:12:18", quantity: 4, price: #<BigDecimal:1f17768,'0.36E2',9(36)>, order_id: 1>, #<LineItem id: 58, product_id: 2, cart_id: 20, created_at: "2017-05-24 08:47:20", updated_at: "2017-05-24 08:47:20", quantity: 1, price: #<BigDecimal:1f1f148,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 64, product_id: 2, cart_id: 21, created_at: "2017-05-24 14:12:28", updated_at: "2017-05-24 14:12:28", quantity: 1, price: #<BigDecimal:1f23f40,'0.36E2',9(36)>, order_id: nil>]>
+
+ LineItem.where(product_id: 2) - vozvrowaet vse line_item-i v kotorie ravni product_id: 2
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.0.0-p648 :004 > LineItem.first
+  LineItem Load (0.5ms)  SELECT "line_items".* FROM "line_items" ORDER BY "line_items"."id" ASC LIMIT 1
+ => #<LineItem id: 22, product_id: 2, cart_id: 14, created_at: "2017-05-18 11:35:06", updated_at: "2017-05-29 12:21:29", quantity: 7, price: #<BigDecimal:1f4e380,'0.36E2',9(36)>, order_id: nil>
+
+LineItem.first - vozvrawaet 1i line_item
+LineItem.last - vozvrawaet poslednii line_item v baze danix
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.0.0-p648 :001 > LineItem.where(product_id: [2, 3])
+  LineItem Load (2.6ms)  SELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" IN (2, 3)
+ => #<ActiveRecord::Relation [#<LineItem id: 22, product_id: 2, cart_id: 14, created_at: "2017-05-18 11:35:06", updated_at: "2017-05-29 12:21:29", quantity: 7, price: #<BigDecimal:1c9eb80,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 56, product_id: 2, cart_id: nil, created_at: "2017-05-24 08:46:42", updated_at: "2017-05-24 14:12:18", quantity: 4, price: #<BigDecimal:1c9c038,'0.36E2',9(36)>, order_id: 1>, #<LineItem id: 58, product_id: 2, cart_id: 20, created_at: "2017-05-24 08:47:20", updated_at: "2017-05-24 08:47:20", quantity: 1, price: #<BigDecimal:1ca1e70,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 64, product_id: 2, cart_id: 21, created_at: "2017-05-24 14:12:28", updated_at: "2017-05-24 14:12:28", quantity: 1, price: #<BigDecimal:1ca09a8,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 59, product_id: 3, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:1ca8ec8,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 61, product_id: 3, cart_id: 14, created_at: "2017-05-24 13:17:07", updated_at: "2017-05-24 13:17:07", quantity: 1, price: #<BigDecimal:1cae2b0,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 63, product_id: 3, cart_id: nil, created_at: "2017-05-24 13:46:34", updated_at: "2017-05-24 14:12:18", quantity: 1, price: #<BigDecimal:1cb33c8,'0.4995E2',18(45)>, order_id: 1>, #<LineItem id: 65, product_id: 3, cart_id: 21, created_at: "2017-05-24 14:12:29", updated_at: "2017-05-24 14:12:29", quantity: 1, price: #<BigDecimal:1cc2850,'0.4995E2',18(45)>, order_id: nil>]>
+
+LineItem.where(product_id: [2, 3]) - vozvratit line_item y kotorix product_id raven 2 ili 3
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.0.0-p648 :002 > LineItem.where(product_id: [2, 3], quantity: 1)
+  LineItem Load (0.4ms)  SELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" IN (2, 3) AND "line_items"."quantity" = 1
+ => #<ActiveRecord::Relation [#<LineItem id: 58, product_id: 2, cart_id: 20, created_at: "2017-05-24 08:47:20", updated_at: "2017-05-24 08:47:20", quantity: 1, price: #<BigDecimal:1cfb240,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 64, product_id: 2, cart_id: 21, created_at: "2017-05-24 14:12:28", updated_at: "2017-05-24 14:12:28", quantity: 1, price: #<BigDecimal:1d04bd8,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 59, product_id: 3, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:1d0e750,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 61, product_id: 3, cart_id: 14, created_at: "2017-05-24 13:17:07", updated_at: "2017-05-24 13:17:07", quantity: 1, price: #<BigDecimal:1d16310,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 63, product_id: 3, cart_id: nil, created_at: "2017-05-24 13:46:34", updated_at: "2017-05-24 14:12:18", quantity: 1, price: #<BigDecimal:1d18d68,'0.4995E2',18(45)>, order_id: 1>, #<LineItem id: 65, product_id: 3, cart_id: 21, created_at: "2017-05-24 14:12:29", updated_at: "2017-05-24 14:12:29", quantity: 1, price: #<BigDecimal:1d1de08,'0.4995E2',18(45)>, order_id: nil>]>
+
+  LineItem.where(product_id: [2, 3], quantity: 1) -- vozvratit line_items po product_id y kotorogo rave 2 ili 3 s koli4estvom 1(quantity: 1)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.0.0-p648 :003 > LineItem.where(product_id: [2, 3]).where(quantity: 1)
+  LineItem Load (0.5ms)  SELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" IN (2, 3) AND "line_items"."quantity" = 1
+ => #<ActiveRecord::Relation [#<LineItem id: 58, product_id: 2, cart_id: 20, created_at: "2017-05-24 08:47:20", updated_at: "2017-05-24 08:47:20", quantity: 1, price: #<BigDecimal:1d6f9d8,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 64, product_id: 2, cart_id: 21, created_at: "2017-05-24 14:12:28", updated_at: "2017-05-24 14:12:28", quantity: 1, price: #<BigDecimal:1d6d520,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 59, product_id: 3, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:1d702c0,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 61, product_id: 3, cart_id: 14, created_at: "2017-05-24 13:17:07", updated_at: "2017-05-24 13:17:07", quantity: 1, price: #<BigDecimal:1d75950,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 63, product_id: 3, cart_id: nil, created_at: "2017-05-24 13:46:34", updated_at: "2017-05-24 14:12:18", quantity: 1, price: #<BigDecimal:1d79028,'0.4995E2',18(45)>, order_id: 1>, #<LineItem id: 65, product_id: 3, cart_id: 21, created_at: "2017-05-24 14:12:29", updated_at: "2017-05-24 14:12:29", quantity: 1, price: #<BigDecimal:1d7d8d0,'0.4995E2',18(45)>, order_id: nil>]>
+
+LineItem.where(product_id: [2, 3]).where(quantity: 1) -- toje savoe 4to LineItem.where(product_id: [2, 3], quantity: 1)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.0.0-p648 :006 > LineItem.order(:cart_id)
+  LineItem Load (0.7ms)  SELECT "line_items".* FROM "line_items" ORDER BY "line_items".cart_id ASC
+ => #<ActiveRecord::Relation [#<LineItem id: 56, product_id: 2, cart_id: nil, created_at: "2017-05-24 08:46:42", updated_at: "2017-05-24 14:12:18", quantity: 4, price: #<BigDecimal:2602f28,'0.36E2',9(36)>, order_id: 1>, #<LineItem id: 57, product_id: 1, cart_id: nil, created_at: "2017-05-24 08:46:44", updated_at: "2017-05-24 14:12:18", quantity: 3, price: #<BigDecimal:2600598,'0.1223E2',18(45)>, order_id: 1>, #<LineItem id: 63, product_id: 3, cart_id: nil, created_at: "2017-05-24 13:46:34", updated_at: "2017-05-24 14:12:18", quantity: 1, price: #<BigDecimal:2605570,'0.4995E2',18(45)>, order_id: 1>, #<LineItem id: 22, product_id: 2, cart_id: 14, created_at: "2017-05-18 11:35:06", updated_at: "2017-05-29 12:21:29", quantity: 7, price: #<BigDecimal:260f5c0,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 61, product_id: 3, cart_id: 14, created_at: "2017-05-24 13:17:07", updated_at: "2017-05-24 13:17:07", quantity: 1, price: #<BigDecimal:26103d0,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 62, product_id: 1, cart_id: 14, created_at: "2017-05-24 13:17:08", updated_at: "2017-05-24 13:17:08", quantity: 1, price: #<BigDecimal:27eade0,'0.1223E2',18(45)>, order_id: nil>, #<LineItem id: 58, product_id: 2, cart_id: 20, created_at: "2017-05-24 08:47:20", updated_at: "2017-05-24 08:47:20", quantity: 1, price: #<BigDecimal:27e9f30,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 59, product_id: 3, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:27e8298,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 60, product_id: 1, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:27fa6c8,'0.1223E2',18(45)>, order_id: nil>, #<LineItem id: 64, product_id: 2, cart_id: 21, created_at: "2017-05-24 14:12:28", updated_at: "2017-05-24 14:12:28", quantity: 1, price: #<BigDecimal:27f8ee0,'0.36E2',9(36)>, order_id: nil>, ...]>
+
+LineItem.order(:cart_id) - sortiruet line_items po (:cart_id)
+ili
+LineItem.order("cart_id")
+  LineItem Load (0.2ms)  SELECT "line_items".* FROM "line_items" ORDER BY cart_id
+ili
+2.0.0-p648 :008 > LineItem.order("cart_id asc")
+  LineItem Load (0.2ms)  SELECT "line_items".* FROM "line_items" ORDER BY cart_id asc
+mojno tak zapisovat` i eto bydet toje samoe
+ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.0.0-p648 :009 > LineItem.order("cart_id desc")
+  LineItem Load (0.2ms)  SELECT "line_items".* FROM "line_items" ORDER BY cart_id desc
+=> #<ActiveRecord::Relation [#<LineItem id: 66, product_id: 1, cart_id: 21, created_at: "2017-05-24 14:12:30", updated_at: "2017-05-24 14:12:30", quantity: 1, price: #<BigDecimal:2ed5e48,'0.1223E2',18(45)>, order_id: nil>, #<LineItem id: 65, product_id: 3, cart_id: 21, created_at: "2017-05-24 14:12:29", updated_at: "2017-05-24 14:12:29", quantity: 1, price: #<BigDecimal:2ed4c78,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 64, product_id: 2, cart_id: 21, created_at: "2017-05-24 14:12:28", updated_at: "2017-05-24 14:12:28", quantity: 1, price: #<BigDecimal:2edb730,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 60, product_id: 1, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:2ef2890,'0.1223E2',18(45)>, order_id: nil>, #<LineItem id: 59, product_id: 3, cart_id: 20, created_at: "2017-05-24 08:47:21", updated_at: "2017-05-24 08:47:21", quantity: 1, price: #<BigDecimal:2f03168,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 58, product_id: 2, cart_id: 20, created_at: "2017-05-24 08:47:20", updated_at: "2017-05-24 08:47:20", quantity: 1, price: #<BigDecimal:2f01458,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 62, product_id: 1, cart_id: 14, created_at: "2017-05-24 13:17:08", updated_at: "2017-05-24 13:17:08", quantity: 1, price: #<BigDecimal:2f13ec8,'0.1223E2',18(45)>, order_id: nil>, #<LineItem id: 61, product_id: 3, cart_id: 14, created_at: "2017-05-24 13:17:07", updated_at: "2017-05-24 13:17:07", quantity: 1, price: #<BigDecimal:2f12730,'0.4995E2',18(45)>, order_id: nil>, #<LineItem id: 22, product_id: 2, cart_id: 14, created_at: "2017-05-18 11:35:06", updated_at: "2017-05-29 12:21:29", quantity: 7, price: #<BigDecimal:2f115d8,'0.36E2',9(36)>, order_id: nil>, #<LineItem id: 63, product_id: 3, cart_id: nil, created_at: "2017-05-24 13:46:34", updated_at: "2017-05-24 14:12:18", quantity: 1, price: #<BigDecimal:2f10520,'0.4995E2',18(45)>, order_id: 1>, ...]>
+
+ LineItem.order("cart_id desc")  -- sortirovka ot menwego k bol`wemy
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
